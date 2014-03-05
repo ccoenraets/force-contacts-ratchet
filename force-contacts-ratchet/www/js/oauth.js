@@ -1,4 +1,6 @@
-var oauth = (function() {
+var oauth = (function () {
+
+    "use strict";
 
     var apiVersion = "v29.0", // The version of the REST API you wish to use in your app.
         forceClient,
@@ -14,9 +16,10 @@ var oauth = (function() {
                 oauthWindowCallback(creds);
                 successHandler(forceClient);
             },
-            function(error) {
+            function (error) {
                 errorHandler(error);
-            });
+            }
+        );
 
         // Register to receive notifications when autoRefreshOnForeground refreshes the sfdc session
         document.addEventListener("salesforceSessionRefresh", salesforceSessionRefreshed, false);
@@ -31,9 +34,8 @@ var oauth = (function() {
     }
 
     function salesforceSessionRefreshed(event) {
-        creds = event.data;
+        var creds = event.data;
 //        forceClient = new forcetk.Client(creds.clientId, creds.loginUrl, null, oauthPlugin.forcetkRefresh);
-        alert('session refreshed ' + creds.accessToken);
         forceClient.setSessionToken(creds.accessToken, apiVersion, creds.instanceUrl);
         forceClient.setRefreshToken(creds.refreshToken);
         forceClient.setUserAgentString(creds.userAgent);
@@ -41,10 +43,10 @@ var oauth = (function() {
 
     return {
         init: init,
-        getClient: function() {
+        getClient: function () {
             return forceClient;
         }
-    }
+    };
 
 }());
 

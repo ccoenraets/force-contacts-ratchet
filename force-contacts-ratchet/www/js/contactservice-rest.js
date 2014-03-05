@@ -1,17 +1,19 @@
-var services = (function() {
+var services = (function () {
+
+    "use strict";
 
     function ContactService(forceClient) {
 
         function findAll(successHandler, errorHandler) {
             var soql = 'SELECT Id, FirstName, LastName, Title FROM contact LIMIT 50';
-            forceClient.query(soql, function(data) {
+            forceClient.query(soql, function (data) {
                 successHandler(data.records);
             }, errorHandler);
         }
 
         function findByName(searchKey, successHandler, errorHandler) {
             var soql = 'SELECT Id, FirstName, LastName, Title FROM contact WHERE name LIKE \'%' + searchKey + '%\' LIMIT 50';
-            forceClient.query(soql, function(data) {
+            forceClient.query(soql, function (data) {
                 successHandler(data.records);
             }, errorHandler);
         }
@@ -23,12 +25,12 @@ var services = (function() {
 
         function save(original, changes, successHandler, errorHandler) {
             if (original) {
-                forceClient.update('Contact', original.Id, changes, function(data) {
+                forceClient.update('Contact', original.Id, changes, function (data) {
                     changes.Id = original.Id;
                     successHandler(changes);
                 }, errorHandler);
             } else {
-                forceClient.create('Contact', changes, function(data) {
+                forceClient.create('Contact', changes, function (data) {
                     changes.Id = data.Id;
                     successHandler(changes);
                 }, errorHandler);
@@ -40,12 +42,12 @@ var services = (function() {
             findByName: findByName,
             findById: findById,
             save: save
-        }
+        };
 
     }
 
     return {
         ContactService: ContactService
-    }
+    };
 
 }());

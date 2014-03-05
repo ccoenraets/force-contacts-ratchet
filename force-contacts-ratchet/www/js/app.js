@@ -16,7 +16,8 @@
             },
             function () {
                 alert('Authentication Error');
-            });
+            }
+        );
 
     }, false);
 

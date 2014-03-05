@@ -1,5 +1,7 @@
 var views = (function () {
 
+    "use strict";
+
     // Compile Handlebars templates
     var tplHome = Handlebars.compile($('#home-template').html()),
         tplContactList = Handlebars.compile($('#contact-list-template').html()),
@@ -11,15 +13,6 @@ var views = (function () {
         var $page = $('<div class="page"></div>'),
             $searchKey,
             $content;
-
-        // Register keypress listener for search
-//        $page.on('keypress', '.search-key', function () {
-//            if (event.keyCode === 13) { // return key
-//                contactService.findByName($searchKey.val(), function (contacts) {
-//                    $content.html(tplContactList(contacts));
-//                });
-//            }
-//        });
 
         $page.on('keyup', '.search-key', function (event) {
             if (event.keyCode !== 13) { // return key
@@ -38,7 +31,7 @@ var views = (function () {
 
         return {
             render: render
-        }
+        };
 
     };
 
@@ -85,7 +78,7 @@ var views = (function () {
 
         return {
             render: render
-        }
+        };
 
     };
 

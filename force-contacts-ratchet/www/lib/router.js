@@ -1,4 +1,7 @@
-var router = (function() {
+var router = (function () {
+
+    "use strict";
+
     var routes = [];
 
     function addRoute(route, handler) {
@@ -15,11 +18,11 @@ var router = (function() {
             parts = path.split('/'),
             partsLength = parts.length;
 
-        for (var i=0; i<routes.length; i++) {
+        for (var i = 0; i < routes.length; i++) {
             var route = routes[i];
             if (route.parts.length === partsLength) {
                 var params = [];
-                for (var j=0; j<partsLength; j++) {
+                for (var j = 0; j < partsLength; j++) {
                     if (route.parts[j].substr(0, 1) === ':') {
                         params.push(parts[j]);
                     } else if (route.parts[j] !== parts[j]) {
@@ -40,6 +43,6 @@ var router = (function() {
         addRoute: addRoute,
         load: load,
         start: start
-    }
+    };
 
 }());
