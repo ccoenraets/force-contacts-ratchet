@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="css/ratchet.css" rel="stylesheet">
+    <link href="ratchet/ratchet-theme-ios.css" rel="stylesheet">
+    <!--<link href="ratchet/ratchet-theme-android.css" rel="stylesheet">-->
+    <link href="css/pageslider.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- In a real life application, consider externalizing these templates -->
+
+<!-- Home Page template -->
+<script id="home-template" type="text/template">
+    <header class="bar bar-nav">
+        <h1 class="title">Salesforce Contacts</h1>
+        <a class="btn btn-link btn-nav pull-right" href="#contacts/new"><span class="icon icon-plus"></span></a>
+    </header>
+    <div class="bar bar-standard bar-header-secondary">
+        <input class='search-key' type="text" placeholder="Search..."/>
+    </div>
+    <div class="content"></div>
+</script>
+
+<!-- Contact List Template -->
+<script id="contact-list-template" type="text/template">
+    <ul class="table-view">
+        {{#each this}}
+        <li class="table-view-cell">
+            <a href="#contacts/{{ Id }}" class="push-right">
+                <div class="media-body">
+                    {{ FirstName }} {{LastName}}
+                    <p>{{ Title }}</p>
+                </div>
+            </a>
+        </li>
+        {{/each}}
+    </ul>
+</script>
+
+<!-- Contact Details Template -->
+<script id="contact-details-template" type="text/template">
+    <header class="bar bar-nav">
+        <a class="btn btn-link btn-nav pull-left btn-back"><span class="icon icon-left-nav"></span>Back</a>
+        <h1 class="title">Details</h1>
+        <a class="btn btn-link btn-nav pull-right btn-edit">Edit</a>
+    </header>
+    <div class='content'>
+        <div class="card" style="padding: 16px;">
+            <h3>{{ FirstName }} {{LastName}}</h3>
+            <p>{{ Title }}<br/>{{ Department }}</p>
+        </div>
+        <div class="card">
+            <ul class="table-view" style="clear:both;">
+                <li class="table-view-cell media">
+                    <a href="tel:{{ Phone }}" class="push-right">
+                        <span class="media-object pull-left icon icon-call"></span>
+                        <div class="media-body">Call Office<p>{{ Phone }}</p></div>
+                    </a>
+                </li>
+                <li class="table-view-cell media">
+                    <a href="tel:{{ MobilePhone }}" class="push-right">
+                        <span class="media-object pull-left icon icon-call"></span>
+                        <div class="media-body">Call Mobile<p>{{ MobilePhone }}</p></div>
+                    </a>
+                </li>
+                <li class="table-view-cell media">
+                    <a href="sms:{{ MobilePhone }}" class="push-right">
+                        <span class="media-object pull-left icon icon-sms"></span>
+                        <div class="media-body">SMS<p>{{ MobilePhone }}</p></div>
+                    </a>
+                </li>
+                <li class="table-view-cell media">
+                    <a href="mailto:{{ Email }}" class="push-right">
+                        <span class="media-object pull-left icon icon-mail"></span>
+                        <div class="media-body">Email<p>{{ Email }}</p></div>
+                    </a>
+                </li>
+            </ul>
+        </div> <!-- end card -->
+    </div> <!-- end content -->
+</script>
+
+
+<script id="contact-edit-template" type="text/template">
+    <header class="bar bar-nav">
+        <a class="btn btn-link btn-nav pull-left btn-back">Cancel</a>
+        <h1 class="title">{{#if this}}Edit{{else}}New{{/if}} Contact</h1>
+        <a class="btn btn-link btn-nav pull-right btn-save">Save</a>
+    </header>
+    <div class='content'>
+        <div class="card">
+            <form class="input-group">
+                <div class="input-row">
+                    <label>First</label>
+                    <input type="text" class="firstName" value="{{FirstName}}">
+                </div>
+                <div class="input-row">
+                    <label>Last</label>
+                    <input type="text" class="lastName" value="{{LastName}}">
+                </div>
+                <div class="input-row">
+                    <label>Title</label>
+                    <input type="text" class="business-title" value="{{Title}}">
+                </div>
+                <div class="input-row">
+                    <label>Phone</label>
+                    <input type="text" class="phone" value="{{Phone}}">
+                </div>
+                <div class="input-row">
+                    <label>Mobile</label>
+                    <input type="text" class="mobilePhone" value="{{MobilePhone}}">
+                </div>
+                <div class="input-row" style="border-bottom: none">
+                    <label>Email</label>
+                    <input type="text" class="email" value="{{Email}}">
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
+
+<script src="lib/cordova-2.3.0.js"></script>
+<script src="lib/jquery.js"></script>
+<script src="lib/handlebars.js"></script>
+<script src="lib/pageslider.js"></script>
+<script src="lib/router.js"></script>
+<script src="lib/fastclick.js"></script>
+<script src="lib/cordova.force.js"></script>
+<script src="lib/forcetk.mobilesdk.js"></script>
+<script src="js/oauth.js"></script>
+<script src="js/contactservice-rest.js"></script>
+<script src="js/views.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
